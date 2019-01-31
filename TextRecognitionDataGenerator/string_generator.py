@@ -39,7 +39,7 @@ def create_strings_from_dict(length, allow_variable, count, lang_dict):
         strings.append(current_string[:-1])
     return strings
 
-def create_strings_from_wikipedia(minimum_length, count, lang):
+def create_strings_from_wikipedia(minimum_length, count, lang, max_length=25): # max_length qyk
     """
         Create all string by randomly picking Wikipedia articles and taking sentences from them.
     """
@@ -60,10 +60,15 @@ def create_strings_from_wikipedia(minimum_length, count, lang):
                 len(s.split(' ')) > minimum_length
                 and not "Wikipedia" in s
                 and not "wikipedia" in s,
+            #qyk
             [
-                ' '.join(re.findall(r"[\w']+", s.strip()))[0:200] for s in soup.get_text().splitlines()
+                ' '.join(re.findall(r"[\w']+", s.strip()))[0:max_length] for s in soup.get_text().splitlines()
             ]
+            #[
+            #    ' '.join(re.findall(r"[\w']+", s.strip()))[0:200] for s in soup.get_text().splitlines()
+            #]
         ))
+        
 
         # Remove the last lines that talks about contributing
         sentences.extend(lines[0:max([1, len(lines) - 5])])

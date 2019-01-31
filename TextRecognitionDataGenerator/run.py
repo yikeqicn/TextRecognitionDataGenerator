@@ -177,7 +177,7 @@ def parse_arguments():
         "-na",
         "--name_format",
         type=int,
-        help="Define how the produced files will be named. 0: [TEXT]_[ID].[EXT], 1: [ID]_[TEXT].[EXT] 2: [ID].[EXT] + one file labels.txt containing id-to-label mappings",
+        help="Define how the produced files will be named. 0: [TEXT]_[ID].[EXT], 1: [ID]_[TEXT].[EXT] 2: [ID].[EXT] + one file labels.txt containing id-to-label mappings 3:[TEXT].[EXT]",  #qyk
         default=0,
     )
     parser.add_argument(
@@ -332,7 +332,7 @@ def main():
         # Create file with filename-to-label connections
         with open(os.path.join(args.output_dir, "labels.txt"), 'w', encoding="utf8") as f:
             for i in range(string_count):
-                file_name = str(i) + "." + args.extension
+                str(i) + "." + args.extension
                 f.write("{} {}\n".format(file_name, strings[i]))
 
 if __name__ == '__main__':
